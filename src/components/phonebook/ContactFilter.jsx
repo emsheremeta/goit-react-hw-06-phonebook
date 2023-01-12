@@ -15,7 +15,6 @@ class ContactFilter extends React.Component {
           className={styles.contactsInput}
           type="text"
           name="filter"
-          value={this.props.filter}
           onChange={this.props.onChange}
         />
       </div>

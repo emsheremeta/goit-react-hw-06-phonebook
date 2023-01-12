@@ -12,21 +12,15 @@ class ContactList extends React.Component {
     return (
       <div>
         {this.props.contacts.length !== 0 &&
-          this.props.contacts
-            .filter(contact =>
-              contact.name
-                .toLowerCase()
-                .includes(this.props.filter.toLowerCase())
-            )
-            .map(contact => {
-              return (
-                <Contact
-                  key={contact.id}
-                  contact={contact}
-                  onDelete={this.props.onDelete}
-                ></Contact>
-              );
-            })}
+          this.props.contacts.map(contact => {
+            return (
+              <Contact
+                key={contact.id}
+                contact={contact}
+                onDelete={this.props.onDelete}
+              ></Contact>
+            );
+          })}
       </div>
     );
   }

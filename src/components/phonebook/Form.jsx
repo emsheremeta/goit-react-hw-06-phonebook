@@ -1,8 +1,12 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Phonebook.module.css';
+import { useDispatch } from 'react-redux';
+import { addContact, setFilter } from 'redux/contactSlice';
 
 function Form(props) {
+  const dispatch = useDispatch();
+
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -12,11 +16,15 @@ function Form(props) {
       alert('Please, add the name! ');
       return;
     }
-    props.onSubmit({
-      name: name,
-      number: number,
-    });
+    const form = event.currentTarget;
+    console.log(form.name.value);
+    dispatch(addContact({ name: form.name.value, number: form.number.value }));
     reset();
+    // props.onSubmit({
+    //   name: name,
+    //   number: number,
+    // });
+    // reset();
   };
 
   const onChangeName = event => {
@@ -62,9 +70,7 @@ function Form(props) {
           required
         />
 
-        <button className={styles.button} onClick={onSubmit}>
-          Add Contact
-        </button>
+        <button className={styles.button}>Add Contact</button>
       </form>
     </div>
   );

@@ -4,31 +4,34 @@ import { nanoid } from 'nanoid';
 import styles from './phonebook/Phonebook.module.css';
 import ContactList from './phonebook/ContactList';
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { filterChange } from 'redux/contactSlice';
 
 function PhoneApp() {
-  const [contacts, setContacts] = useState(
-    JSON.parse(localStorage.getItem('contacts'))
-  );
-  const [filter, setFilter] = useState('');
+  const dispatch = useDispatch();
+  const contacts = useSelector(state => state.contacts.contacts);
+  const filter = useSelector(state => state.contacts.filter);
+  // const [contacts, setContacts] = useState(
+  //   JSON.parse(localStorage.getItem('contacts'))
+  // );
+  // const [filter, setFilter] = useState('');
 
-  useEffect(() => {
-    console.log(`Resetting to ${JSON.stringify(contacts)}`);
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
+  // useEffect(() => {
+  //   console.log(`Resetting to ${JSON.stringify(contacts)}`);
+  //   localStorage.setItem('contacts', JSON.stringify(contacts));
+  // }, [contacts]);
 
-  useEffect(() => {
-    console.log('efefct');
-    const contacts = JSON.parse(localStorage.getItem('contacts'));
-    if (contacts) {
-      setContacts(contacts);
-    }
-    console.log('efefct2');
-
-    // localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, []);
+  // useEffect(() => {
+  //   const contacts = JSON.parse(localStorage.getItem('contacts'));
+  //   if (contacts) {
+  //     setContacts(contacts);
+  //   }
+  // }, []);
 
   const onChange = event => {
-    setFilter(event.currentTarget.value);
+    // setFilter(event.currentTarget.value);
+    const filter = event.currentTarget.value;
+    dispatch(filterChange(filter));
   };
   const onSubmit = data => {
     console.log(data);
@@ -45,7 +48,7 @@ function PhoneApp() {
         name: name,
         number: number,
       };
-      setContacts([...contacts, contact]);
+      // setContacts([...contacts, contact]);
       localStorage.setItem('contacts', JSON.stringify([...contacts, contact]));
     } else {
       alert('This contact already exist');
@@ -53,10 +56,11 @@ function PhoneApp() {
   };
 
   const onDelete = id => {
-    setContacts(contacts.filter(contact => contact.id !== id));
+    // setContacts(contacts.filter(contact => contact.id !== id));
   };
 
   const getFilteredContacts = () => {
+    console.log(contacts.contacts);
     return contacts.filter(contact =>
       contact.name.toLowerCase().includes(filter.toLowerCase())
     );
