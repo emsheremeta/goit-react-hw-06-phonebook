@@ -1,0 +1,98 @@
+.text{
+    font-weight: bold;
+    font-size: 50px;
+    margin: 20px;
+}
+.contactsText{
+    font-weight: bold;
+    font-size: 40px;
+    margin: 20px;
+}
+
+.form{
+    outline: 2px solid black;
+    width: 400px;
+    height: 250px;
+    margin-left: 20px;
+    padding: 20px 20px;
+    border-radius: 5px;
+    background-color: #f2f2f2;
+}
+
+
+.label{
+    align-items: center;
+    display: flex;
+    font-size: 17px;
+    font-weight: 500;
+   
+}
+.contactLabel{
+    margin: 20px;
+    align-items: center;
+    display: flex;
+    font-size: 17px;
+    font-weight: 500;
+   
+}
+
+.input{
+    
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  position: relative;
+  
+}
+.contactsInput{
+    padding: 12px 20px;
+  margin-left: 20px ;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+ 
+}
+.contactsInput:hover, 
+.contactsInput:focus{
+    outline: 2px solid blue;
+}
+
+.button{
+    width: 30%;
+    background-color: blue;
+    color: white;
+    padding: 8px 15px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+  
+}
+
+.buttonContact {
+    width: 10%;
+    background-color: blue;
+    color: white;
+    padding: 5px 10px;
+    margin: 5px 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    
+}
+.button:hover,
+.button:focus{
+    background-color: darkblue;
+}
+
+.contactList{
+    font-size: 15px;
+    margin: 10px 5px;
+
+
+}
