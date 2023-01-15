@@ -12,7 +12,7 @@ function PhoneApp() {
   const filter = useSelector(getFilter);
 
   console.log('contacts', JSON.stringify(contacts));
-  console.log('filter', JSON.stringify(filter));
+  console.log('filter123', JSON.stringify(filter));
 
   const onChange = event => {
     const filter = event.currentTarget.value;
@@ -25,8 +25,8 @@ function PhoneApp() {
   };
 
   const getFilteredContacts = () => {
-    console.log(contacts.contacts);
-    return contacts.filter(contact =>
+    console.log(contacts, typeof contacts);
+    return contacts.contacts.filter(contact =>
       contact.name.toLowerCase().includes(filter.toLowerCase())
     );
   };

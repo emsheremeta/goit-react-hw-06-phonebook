@@ -18,8 +18,8 @@ export const contactReducer = createReducer (contactInitialState, {
     }
 });
 export const filterReducer = createReducer(filterInitialState, {
-    [filterChange] : (state, action ) => {
-        console.log('filter ' + JSON.stringify(action.payload));
+    [filterChange] : ( state, action ) => {
+        console.log('filter555 ' + JSON.stringify(action));
         return action.payload;
     }
  });

@@ -19,7 +19,7 @@ function Form() {
       return;
     }
     if (
-      contacts.filter(
+      contacts.contacts.filter(
         contact => contact.name.toLocaleLowerCase() === name.toLocaleLowerCase()
       ).length === 0
     ) {
@@ -32,6 +32,7 @@ function Form() {
     } else {
       alert('This contact already exist');
     }
+    form.reset();
   };
 
   return (
