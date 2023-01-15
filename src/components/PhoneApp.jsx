@@ -5,7 +5,7 @@ import styles from './phonebook/Phonebook.module.css';
 import ContactList from './phonebook/ContactList';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterChange } from 'redux/contactSlice';
+import { deleteContact, filterChange } from 'redux/contactSlice';
 
 function PhoneApp() {
   const dispatch = useDispatch();
@@ -57,6 +57,8 @@ function PhoneApp() {
 
   const onDelete = id => {
     // setContacts(contacts.filter(contact => contact.id !== id));
+    dispatch(deleteContact(id));
+    console.log(id);
   };
 
   const getFilteredContacts = () => {
