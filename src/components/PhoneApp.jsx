@@ -1,62 +1,25 @@
 import ContactFilter from './phonebook/ContactFilter';
 import Form from './phonebook/Form';
-import { nanoid } from 'nanoid';
 import styles from './phonebook/Phonebook.module.css';
 import ContactList from './phonebook/ContactList';
-import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContact, filterChange } from 'redux/contactSlice';
+import { getContacts, getFilter } from 'redux/selectors';
+import { deleteContact, filterChange } from 'redux/actions';
 
 function PhoneApp() {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts.contacts);
-  const filter = useSelector(state => state.contacts.filter);
-  // const [contacts, setContacts] = useState(
-  //   JSON.parse(localStorage.getItem('contacts'))
-  // );
-  // const [filter, setFilter] = useState('');
+  const contacts = useSelector(getContacts);
+  const filter = useSelector(getFilter);
 
-  // useEffect(() => {
-  //   console.log(`Resetting to ${JSON.stringify(contacts)}`);
-  //   localStorage.setItem('contacts', JSON.stringify(contacts));
-  // }, [contacts]);
-
-  // useEffect(() => {
-  //   const contacts = JSON.parse(localStorage.getItem('contacts'));
-  //   if (contacts) {
-  //     setContacts(contacts);
-  //   }
-  // }, []);
+  console.log('contacts', JSON.stringify(contacts));
+  console.log('filter', JSON.stringify(filter));
 
   const onChange = event => {
-    // setFilter(event.currentTarget.value);
     const filter = event.currentTarget.value;
     dispatch(filterChange(filter));
   };
-  const onSubmit = data => {
-    console.log(data);
-    const { name, number } = data;
-
-    if (
-      contacts.filter(
-        contact => contact.name.toLocaleLowerCase() === name.toLocaleLowerCase()
-      ).length === 0
-    ) {
-      const id = nanoid();
-      const contact = {
-        id: id,
-        name: name,
-        number: number,
-      };
-      // setContacts([...contacts, contact]);
-      localStorage.setItem('contacts', JSON.stringify([...contacts, contact]));
-    } else {
-      alert('This contact already exist');
-    }
-  };
 
   const onDelete = id => {
-    // setContacts(contacts.filter(contact => contact.id !== id));
     dispatch(deleteContact(id));
     console.log(id);
   };
@@ -71,11 +34,8 @@ function PhoneApp() {
   return (
     <div>
       <h1 className={styles.text}>Phonebook</h1>
-
-      <Form onSubmit={onSubmit}></Form>
-
+      <Form />
       <h2 className={styles.contactText}>Contacts</h2>
-
       <ContactFilter filter={filter} onChange={onChange}></ContactFilter>
       <ContactList
         contacts={getFilteredContacts()}
@@ -87,6 +47,7 @@ function PhoneApp() {
 }
 export default PhoneApp;
 
+// OLD VERSION
 // class PhoneApp extends React.Component {
 //   state = {
 //     contacts: [],

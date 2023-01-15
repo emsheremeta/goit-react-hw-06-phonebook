@@ -1,26 +1,23 @@
-import { useState } from 'react';
-import { nanoid } from 'nanoid';
-import PropTypes from 'prop-types';
 import styles from './Phonebook.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact, setFilter } from 'redux/contactSlice';
+import { addContact } from 'redux/actions';
+import { getContacts } from 'redux/selectors';
 
-function Form(props) {
+function Form() {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts.contacts);
-
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const contacts = useSelector(getContacts);
 
   const onSubmit = event => {
     event.preventDefault();
+    const form = event.currentTarget;
+    const name = form.name.value;
+    const number = form.number.value;
+    console.log(form.name.value);
+
     if (name.trim() === '') {
       alert('Please, add the name! ');
       return;
     }
-    const form = event.currentTarget;
-    console.log(form.name.value);
-
     if (
       contacts.filter(
         contact => contact.name.toLocaleLowerCase() === name.toLocaleLowerCase()
@@ -28,32 +25,13 @@ function Form(props) {
     ) {
       dispatch(
         addContact({
-          name: form.name.value,
-          number: form.number.value,
-          id: nanoid(),
+          name: name,
+          number: number,
         })
       );
     } else {
       alert('This contact already exist');
     }
-    reset();
-    // props.onSubmit({
-    //   name: name,
-    //   number: number,
-    // });
-    // reset();
-  };
-
-  const onChangeName = event => {
-    setName(event.target.value);
-  };
-
-  const onChangeNumber = event => {
-    setNumber(event.target.value);
-  };
-  const reset = () => {
-    setName('');
-    setNumber('');
   };
 
   return (
@@ -64,10 +42,8 @@ function Form(props) {
           className={styles.input}
           size={35}
           placeholder="Put your name here"
-          onChange={onChangeName}
           type="text"
           name="name"
-          value={name}
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
@@ -78,10 +54,8 @@ function Form(props) {
           className={styles.input}
           size={35}
           placeholder="Put your number here"
-          onChange={onChangeNumber}
           type="tel"
           name="number"
-          value={number}
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
@@ -94,10 +68,6 @@ function Form(props) {
 }
 
 export default Form;
-
-Form.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
 
 // OLD VERSION
 
