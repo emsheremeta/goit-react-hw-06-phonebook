@@ -1,6 +1,6 @@
 import styles from './Phonebook.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/actions';
+import { addContact } from 'redux/contactSlice';
 import { getContacts } from 'redux/selectors';
 
 function Form() {
@@ -37,6 +37,7 @@ function Form() {
 
   return (
     <div>
+      <h1 className={styles.text}>Phonebook</h1>
       <form className={styles.form} onSubmit={onSubmit}>
         <label className={styles.label}>Name</label>
         <input

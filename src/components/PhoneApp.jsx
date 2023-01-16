@@ -1,47 +1,13 @@
 import ContactFilter from './phonebook/ContactFilter';
 import Form from './phonebook/Form';
-import styles from './phonebook/Phonebook.module.css';
 import ContactList from './phonebook/ContactList';
-import { useDispatch, useSelector } from 'react-redux';
-import { getContacts, getFilter } from 'redux/selectors';
-import { deleteContact, filterChange } from 'redux/actions';
 
 function PhoneApp() {
-  const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
-  const filter = useSelector(getFilter);
-
-  console.log('contacts', JSON.stringify(contacts));
-  console.log('filter123', JSON.stringify(filter));
-
-  const onChange = event => {
-    const filter = event.currentTarget.value;
-    dispatch(filterChange(filter));
-  };
-
-  const onDelete = id => {
-    dispatch(deleteContact(id));
-    console.log(id);
-  };
-
-  const getFilteredContacts = () => {
-    console.log(contacts, typeof contacts);
-    return contacts.contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
-    );
-  };
-
   return (
     <div>
-      <h1 className={styles.text}>Phonebook</h1>
       <Form />
-      <h2 className={styles.contactText}>Contacts</h2>
-      <ContactFilter filter={filter} onChange={onChange}></ContactFilter>
-      <ContactList
-        contacts={getFilteredContacts()}
-        filter={filter}
-        onDelete={onDelete}
-      ></ContactList>
+      <ContactFilter />
+      <ContactList />
     </div>
   );
 }

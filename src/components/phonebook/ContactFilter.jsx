@@ -1,25 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Phonebook.module.css';
+import { useDispatch } from 'react-redux';
+import { filterChange } from 'redux/contactSlice';
 
-class ContactFilter extends React.Component {
-  static propTypes = {
-    filter: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
+function ContactFilter() {
+  const dispatch = useDispatch();
+
+  const onChange = event => {
+    const filter = event.currentTarget.value;
+    dispatch(filterChange(filter));
   };
-  render() {
-    return (
-      <div>
-        <label className={styles.contactLabel}>Find contacts by name:</label>
-        <input
-          className={styles.contactsInput}
-          type="text"
-          name="filter"
-          onChange={this.props.onChange}
-        />
-      </div>
-    );
-  }
+  return (
+    <div>
+      <label className={styles.contactLabel}>Find contacts by name:</label>
+      <input
+        className={styles.contactsInput}
+        type="text"
+        name="filter"
+        onChange={onChange}
+      />
+    </div>
+  );
 }
 
 export default ContactFilter;
