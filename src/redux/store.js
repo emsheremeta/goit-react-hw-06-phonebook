@@ -1,5 +1,5 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
-import  { contactReducers}  from './contactSlice'
+import  {contactSlice}  from './contactSlice'
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist'
 import {
@@ -11,30 +11,30 @@ import {
     REGISTER,
   } from 'redux-persist'
 
-// const persistConfig = {
-//     key: 'root',
-//     storage,
-//   };
+const persistConfig = {
+    key: 'root',
+    storage,
+  };
 
-//   const rootReducer = combineReducers({ 
-//     addContact: addContact, 
-//     deleteContact: deleteContact
-//   });
+  const rootReducer = combineReducers({ 
+    contacts: contactSlice.reducer
+  });
+
   
-//   const persistedReducer = persistReducer(persistConfig, rootReducer)
+  const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export const store = configureStore({
   reducer: {
-    contacts: contactReducers,
+    root: persistedReducer,
   }
-//   ,
-// //   reducer: persistedReducer,
-//   middleware: (getDefaultMiddleware) =>
-//     getDefaultMiddleware({
-//       serializableCheck: {
-//         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-//       },
-    // }),
-});
+  ,
+
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+})
 
 export const persistor = persistStore(store)

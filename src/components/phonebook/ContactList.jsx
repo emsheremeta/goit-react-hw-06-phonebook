@@ -1,6 +1,5 @@
 import React from 'react';
 import Contact from './Contact';
-import PropTypes from 'prop-types';
 import styles from './Phonebook.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact } from 'redux/contactSlice';
@@ -16,15 +15,14 @@ function ContactList() {
     console.log(id);
   };
   const getFilteredContacts = () => {
-    console.log(contacts, typeof contacts);
     return contacts.contacts.filter(contact =>
-      contact.name.toLowerCase().includes(contacts.filter.toLowerCase())
+      contact.name.toLowerCase().includes(filter.toLowerCase())
     );
   };
   return (
-    <div>
+    <div className={styles.contactWrapper}>
       <h2 className={styles.contactText}>Contacts</h2>
-      {contacts.contacts.length !== 0 &&
+      {contacts.length !== 0 &&
         getFilteredContacts().map(contact => {
           return (
             <Contact
