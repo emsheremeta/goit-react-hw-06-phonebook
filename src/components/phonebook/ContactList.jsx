@@ -10,6 +10,8 @@ function ContactList() {
   const filter = useSelector(getFilter);
   const dispatch = useDispatch();
 
+  console.log('filter', typeof filter);
+
   const onDelete = id => {
     dispatch(deleteContact(id));
     console.log(id);

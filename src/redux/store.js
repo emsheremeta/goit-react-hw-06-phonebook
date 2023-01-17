@@ -10,6 +10,7 @@ import {
     PURGE,
     REGISTER,
   } from 'redux-persist'
+import { filterSlice } from './filterSlice';
 
 const persistConfig = {
     key: 'root',
@@ -25,7 +26,8 @@ const persistConfig = {
 
 export const store = configureStore({
   reducer: {
-    root: persistedReducer,
+    contactRoot: persistedReducer,
+    filterRoot: filterSlice.reducer
   }
   ,
 

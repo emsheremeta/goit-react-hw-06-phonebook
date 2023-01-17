@@ -1,13 +1,10 @@
 import React from 'react';
 import styles from './Phonebook.module.css';
 import { useDispatch } from 'react-redux';
-import { filterChange } from 'redux/contactSlice';
-import { useSelector } from 'react-redux';
-import { getFilter } from 'redux/selectors';
+import { filterChange } from 'redux/filterSlice';
 
 function ContactFilter() {
   const dispatch = useDispatch();
-  const filter = useSelector(getFilter);
 
   const onChange = event => {
     const filter = event.currentTarget.value;
@@ -21,7 +18,6 @@ function ContactFilter() {
         type="text"
         name="filter"
         onChange={onChange}
-        value={filter}
       />
     </div>
   );
